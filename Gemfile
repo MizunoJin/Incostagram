@@ -4,6 +4,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 gem 'rails',     '6.0.3'
 gem 'meta-tags'
 gem 'slim-rails'
+gem 'html2slim'
 gem 'pry-rails'
 gem 'omniauth'
 gem 'omniauth-facebook'
@@ -23,6 +24,7 @@ gem 'webpacker',  '4.0.7'
 gem 'turbolinks', '5.2.0'
 gem 'jbuilder',   '2.9.1'
 gem 'bootsnap',   '1.4.5', require: false
+gem 'rubocop-airbnb'
 
 group :development, :test do
   gem 'sqlite3', '1.4.1'
@@ -34,6 +36,8 @@ group :development do
   gem 'listen',                '3.1.5'
   gem 'spring',                '2.1.0'
   gem 'spring-watcher-listen', '2.0.1'
+  gem 'annotate'
+  gem 'bullet'
 end
 
 group :test do
@@ -51,5 +55,4 @@ group :production do
   gem 'pg', '1.1.4'
 end
 
-# Windows ではタイムゾーン情報用の tzinfo-data gem を含める必要があります
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]

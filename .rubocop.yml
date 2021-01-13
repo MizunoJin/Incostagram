@@ -1,0 +1,29 @@
+
+inherit_from:
+  - .rubocop_airbnb.yml
+
+Rails:
+  Enabled: true
+
+# 文字数の上限を150字に変更
+Metrics/LineLength:
+  Max: 150
+  Exclude:
+    - 'config/routes.rb'
+
+# include is used at the top level. Use inside class or module.を許可
+Style/MixinUsage:
+  Enabled: false
+
+AsciiComments:
+  Enabled: false
+
+AllCops:
+  Include:
+    - '**/Rakefile'
+    - '**/config.ru'
+  Exclude:
+    - 'db/**/*'
+    - 'config/**/*'
+    - 'script/**/*'
+    - 'bin/bundle'
