@@ -1,24 +1,48 @@
-# README
+# Incostagram
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+インコスタグラムとはインコの画像専門のSNSサービスです。 様々なインコ画像をユーザー間で共有し、幸せなライフを実現いたします。 
 
-Things you may want to cover:
+url : https://incostacram.herokuapp.com/
 
-* Ruby version
+* ログイン用
 
-* System dependencies
+メールアドレス：example@example.com
 
-* Configuration
+パスワード：foobar
 
-* Database creation
+# 実装機能
 
-* Database initialization
+* Facebookログイン機能
+* 検索フォームから自由記述で写真を検索することができる
+* 他のユーザーをフォローすることができる
+* ログイン後はトップページにフォローしているユーザーの写真が時系列順に表示される
+* 通知を受信すると通知一覧ページで確認することができる
+* ログイン後に写真をアップロードすることができる
+* 写真は全て正方形に整形して公開される
+* 写真には他のログイン済みユーザーがコメントを残すことができる
+* 写真にコメントがつくと、写真をアップロードしたユーザーに通知が送信される
+* アップロードされた写真は他のユーザーがお気に入りに追加することができる
+* お気に入りに追加されると、写真をアップロードしたユーザーに通知が送信される
+* 現在のパスワード、新しいパスワード、新しいパスワードの確認入力欄があり、現在のパスワードが正しく、新しいパスワードと新しいパスワードの入力欄が一致する場合にパスワードが更新される。
 
-* How to run the test suite
+# アプリケーション内で使用している技術
 
-* Services (job queues, cache servers, search engines, etc.)
+* Minitestを使用した自動テスト
+* rubocopを使用した静的コード解析ツール
+* Dockerによる環境構築
+* Facebook APIによるログイン
+* S3を利用したクラウドストレージ
+* gem "bullet"を利用したN+1問題の検出・解決
+* sass, slimを使用した記述
 
-* Deployment instructions
+# 環境
 
-* ...
+* ホストOS : MacOS
+* データベース：Postgresql
+* 言語 : HTML CSS(SCSS) JavaScript Ruby SQL
+* フレームワーク : Ruby on Rails
+* CSSフレームワーク : bootstrap
+* JSライブラリ : jQuery
+* インフラ : heroku Docker AWS S3
+* テストフレームワーク : Minitest
+* その他ツールなど : Git Github Rubocop
