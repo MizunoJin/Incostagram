@@ -51,7 +51,7 @@ Rails.application.configure do
   config.log_level = :debug
 
   # Prepend all log lines with the following tags.
-  config.log_tags = [ :request_id ]
+  config.log_tags = [:request_id]
 
   # Use a different cache store in production.
   # config.cache_store = :mem_cache_store
@@ -61,7 +61,7 @@ Rails.application.configure do
   # config.active_job.queue_name_prefix = "incostagram_production"
 
   config.action_mailer.perform_caching = false
-  
+
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
   config.action_mailer.raise_delivery_errors = true
@@ -69,15 +69,15 @@ Rails.application.configure do
   host = 'incostagram.herokuapp.com'
   config.action_mailer.default_url_options = { host: host }
   ActionMailer::Base.smtp_settings = {
-    :address        => 'smtp.sendgrid.net',
-    :port           => '587',
+    :address => 'smtp.sendgrid.net',
+    :port => '587',
     :authentication => :plain,
-    :user_name      => ENV['SENDGRID_USERNAME'],
-    :password       => ENV['SENDGRID_PASSWORD'],
-    :domain         => 'heroku.com',
-    :enable_starttls_auto => true
+    :user_name => ENV['SENDGRID_USERNAME'],
+    :password => ENV['SENDGRID_PASSWORD'],
+    :domain => 'heroku.com',
+    :enable_starttls_auto => true,
   }
-  
+
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
   # the I18n.default_locale when a translation cannot be found).
   config.i18n.fallbacks = true
@@ -121,5 +121,4 @@ Rails.application.configure do
   # config.active_record.database_selector = { delay: 2.seconds }
   # config.active_record.database_resolver = ActiveRecord::Middleware::DatabaseSelector::Resolver
   # config.active_record.database_resolver_context = ActiveRecord::Middleware::DatabaseSelector::Resolver::Session
-
 end

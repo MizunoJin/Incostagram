@@ -1,0 +1,48 @@
+|  <div class="modal fade" id="exampleModalLong-
+= micropost.id
+| " tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true"> 
+.modal-dialog[role="document"]
+  .modal-content
+    .modal-header
+      button.close[type="button" data-dismiss="modal" aria-label="Close"]
+        span[aria-hidden="true"]
+          | ×
+    .modal-body
+      = render micropost
+      |  　 
+      - @micropost = micropost
+      |  　 
+      - @comments = @micropost.comments
+      |  　 
+      #comments_area
+        h2
+          | コメント
+        |  　 
+        - @comments.each do |comment|
+          - if comment.parent_id.present? || comment.id.blank?
+            - next
+          hr
+          - user = comment.user
+          = gravatar_for user, size: 50
+          = link_to "#{user.name}  / #{user.username}", user
+          p
+            =comment.content
+          span
+            = time_ago_in_words(comment.created_at)
+            | 前
+          - if current_user?(comment.user)
+            = link_to "削除", "/microposts/#{@micropost.id}/comments/#{comment.id}", method: :delete,
+            -                                                        data: { confirm: "You sure?" }
+          |  　　 
+        = form_with(model:[@micropost,@comment]) do |form|
+          p
+            label
+              | 新しいコメント
+          textarea.form-control.input-form[name="comment[content]" rows="5"]
+            =@comment.content
+          = form.hidden_field :micropost_id, value: micropost.id
+          .actions
+            = form.submit value: "投稿する"
+    .modal-footer
+      button.btn.btn-secondary[type="button" data-dismiss="modal"]
+        | 閉じる

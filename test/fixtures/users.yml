@@ -1,3 +1,34 @@
+# == Schema Information
+#
+# Table name: users
+#
+#  id                :bigint           not null, primary key
+#  activated         :boolean          default(FALSE)
+#  activated_at      :datetime
+#  activation_digest :string
+#  admin             :boolean          default(FALSE)
+#  email             :string
+#  introduction      :text
+#  name              :string
+#  number            :string
+#  oauth_expires_at  :string
+#  oauth_token       :string
+#  password_digest   :string
+#  remember_digest   :string
+#  reset_digest      :string
+#  reset_sent_at     :datetime
+#  sex               :string
+#  uid               :string
+#  unique_name       :string
+#  username          :string
+#  website           :string
+#  created_at        :datetime         not null
+#  updated_at        :datetime         not null
+#
+# Indexes
+#
+#  index_users_on_email  (email) UNIQUE
+#
 michael:
   name: Michael Example
   username: michael

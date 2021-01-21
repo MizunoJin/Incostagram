@@ -6,7 +6,7 @@ class LikingTest < ActionDispatch::IntegrationTest
     log_in_as(@user)
     @micropost = microposts(:ants)
   end
-  
+
   test "like page" do
     get "/users/#{@user.id}/likes"
     assert_match @user.likes.count.to_s, response.body

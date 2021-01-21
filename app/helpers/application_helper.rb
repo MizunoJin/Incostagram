@@ -1,6 +1,5 @@
 module ApplicationHelper
-  
-  def full_title(page_title = "")
+  def full_title(page_title = {})
     base_title = "Incostagram"
     if page_title.empty?
       base_title
@@ -8,7 +7,7 @@ module ApplicationHelper
       page_title + " | " + base_title
     end
   end
-  
+
   def default_meta_tags
     {
       site: 'Incostagram',
@@ -18,7 +17,7 @@ module ApplicationHelper
       description: 'Incostagramは、インコ画像専用のSNSサービスです。インコ画像を共有し、幸せなライフを実現しましょう！',
       keywords: 'インコ',
       canonical: request.original_url,
-      noindex: ! Rails.env.production?,
+      noindex: !Rails.env.production?,
       icon: [
         { href: image_url('icon.png') },
         { href: image_url('icon.png'), rel: 'apple-touch-icon', sizes: '180x180', type: 'image/jpg' },
@@ -26,12 +25,12 @@ module ApplicationHelper
       og: {
         site_name: 'Incostagram',
         title: 'Incostagram',
-        description: 'Incostagramは、インコ画像専用のSNSサービスです。インコ画像を共有し、幸せなライフを実現しましょう！', 
+        description: 'Incostagramは、インコ画像専用のSNSサービスです。インコ画像を共有し、幸せなライフを実現しましょう！',
         type: 'website',
         url: request.original_url,
         image: image_url('1.jpg'),
         locale: 'ja_JP',
-      }
+      },
     }
   end
 end

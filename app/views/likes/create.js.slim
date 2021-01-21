@@ -1,0 +1,5 @@
+| $('#like-btn-
+= @micropost.id
+| ').html("
+= escape_javascript(render partial: "likes/like", locals: { micropost: @micropost })
+| ");

@@ -1,0 +1,22 @@
+- if logged_in?
+  .container
+    .row
+      aside.col-md-4
+        section.user_info
+          = render 'shared/user_info'
+        section.stats
+          = render 'shared/stats'
+      .col-md-8
+        = render 'shared/feed'
+- else
+  #incostagram-top.center.jumbotron
+    .container
+      h1
+        | Welcome to Incostagram!
+      = link_to "今すぐ登録!", signup_path, class: "btn btn-lg btn-primary"
+      = link_to "/auth/facebook" do
+        bottom.btn.btn-lg.btn-primary
+          i.fab.fa-facebook-square
+          |  Facebookでログイン 
+script
+  |  $('#myModal').on('shown.bs.modal', function () { $('#myInput').trigger('focus') }) 

@@ -6,5 +6,4 @@ class UsersProfileTest < ActionDispatch::IntegrationTest
   def setup
     @user = users(:michael)
   end
-
 end

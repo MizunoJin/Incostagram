@@ -1,3 +1,24 @@
+# == Schema Information
+#
+# Table name: microposts
+#
+#  id          :bigint           not null, primary key
+#  content     :text
+#  in_reply_to :integer
+#  likes_count :integer
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#  user_id     :bigint           not null
+#
+# Indexes
+#
+#  index_microposts_on_user_id                 (user_id)
+#  index_microposts_on_user_id_and_created_at  (user_id,created_at)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (user_id => users.id)
+#
 class Micropost < ApplicationRecord
   belongs_to :user
   has_many :likes
@@ -8,18 +29,22 @@ class Micropost < ApplicationRecord
   default_scope -> { order(created_at: :desc) }
   validates :user_id, presence: true
   validates :content, presence: true, length: { maximum: 140 }
-  validates :image,   content_type: { in: %w[image/jpeg image/png],
-                                      message: "有効なフォーマットではありません" },
-                      size:         { less_than: 5.megabytes,
-                                      message: "ファイルサイズが大きすぎます" },
-                                      presence: true
-  
-   # ある投稿がいいね済みか調べる
+  validates :image,   content_type: {
+    in: %w(image/jpeg image/png),
+    message: "有効なフォーマットではありません",
+  },
+                      size: {
+                        less_than: 5.megabytes,
+                        message: "ファイルサイズが大きすぎます",
+                      },
+                      presence: true
+
+  # ある投稿がいいね済みか調べる
   def liked_by?(user)
     likes.where(user_id: user.id).exists?
   end
-  
-  #いいねされた際の通知を作る
+
+  # いいねされた際の通知を作る
   def create_notification_like!(current_user)
     # すでに「いいね」されているか検索
     temp = Notification.where(["visitor_id = ? and visited_id = ? and micropost_id = ? and action = ? ", current_user.id, user_id, id, 'like'])
@@ -37,7 +62,7 @@ class Micropost < ApplicationRecord
       notification.save if notification.valid?
     end
   end
-  
+
   def create_notification_comment!(current_user, comment_id)
     # 自分以外にコメントしている人をすべて取得し、全員に通知を送る
     temp_ids = Comment.select(:user_id).where(micropost_id: id).where.not(user_id: current_user.id).distinct
@@ -62,9 +87,9 @@ class Micropost < ApplicationRecord
     end
     notification.save if notification.valid?
   end
-  
+
   def create_notification_follow!(current_user)
-    temp = Notification.where(["visitor_id = ? and visited_id = ? and action = ? ",current_user.id, id, 'follow'])
+    temp = Notification.where(["visitor_id = ? and visited_id = ? and action = ? ", current_user.id, id, 'follow'])
     if temp.blank?
       notification = current_user.active_notifications.new(
         visited_id: id,
@@ -78,8 +103,7 @@ class Micropost < ApplicationRecord
     if search
       where(['content LIKE ?', "%#{search}%"])
     else
-      all 
+      all
     end
   end
-  
 end
