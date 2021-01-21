@@ -1,7 +1,6 @@
 require 'test_helper'
 
 class FollowingTest < ActionDispatch::IntegrationTest
-  
   def setup
     @user = users(:michael)
     @other = users(:archer)
@@ -53,5 +52,4 @@ class FollowingTest < ActionDispatch::IntegrationTest
       delete relationship_path(relationship), xhr: true
     end
   end
-  
 end

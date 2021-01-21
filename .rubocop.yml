@@ -1,0 +1,46 @@
+
+inherit_from:
+  - .rubocop_airbnb.yml
+
+Rails:
+  Enabled: true
+
+# 文字数の上限を150字に変更
+Metrics/LineLength:
+  Max: 150
+  Exclude:
+    - 'config/routes.rb'
+
+# include is used at the top level. Use inside class or module.を許可
+Style/MixinUsage:
+  Enabled: false
+
+Style/AsciiComments:
+  Enabled: false
+
+Rails/HelperInstanceVariable:
+  Enabled: false
+
+Lint/AssignmentInCondition:
+  Enabled: false
+
+Airbnb/SimpleUnless:
+  Enabled: false
+
+Airbnb/OptArgParameters:
+  Enabled: false
+
+Airbnb/RiskyActiverecordInvocation:
+  Enabled: false
+
+# ポストモデル、通知モデルのdefault scopeを許可（並び替え）
+Airbnb/DefaultScope:
+  Exclude:
+    - 'app/models/micropost.rb'
+    - 'app/models/notification.rb'
+
+AllCops:
+  Exclude:
+    - 'db/**/*'
+    - 'bin/bundle'
+    - 'node_modules/node-sass/src/libsass/contrib/*'

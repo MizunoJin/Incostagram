@@ -1,7 +1,6 @@
 require 'test_helper'
 
 class MicropostsInterfaceTest < ActionDispatch::IntegrationTest
-
   def setup
     @user = users(:michael)
   end
@@ -14,7 +13,7 @@ class MicropostsInterfaceTest < ActionDispatch::IntegrationTest
     assert_no_difference 'Micropost.count' do
       post microposts_path, params: { micropost: { content: "" } }
     end
-    assert_select 'a[href=?]', '/?page=2'  # 正しいページネーションリンク
+    assert_select 'a[href=?]', '/?page=2' # 正しいページネーションリンク
     # 有効な送信
     content = "This micropost really ties the room together"
     image = fixture_file_upload('test/fixtures/kitten.jpg', 'image/jpeg')
@@ -31,6 +30,4 @@ class MicropostsInterfaceTest < ActionDispatch::IntegrationTest
       delete micropost_path(first_micropost)
     end
   end
-  
-  
 end

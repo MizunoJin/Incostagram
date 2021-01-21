@@ -1,18 +1,20 @@
 class UsersController < ApplicationController
-  before_action :logged_in_user, only: [:edit, :update, :index, :destroy,
-                                        :following, :followers, :password_edit, :password_update, :likes]
+  before_action :logged_in_user, only: [
+    :edit, :update, :index, :destroy,
+    :following, :followers, :password_edit, :password_update, :likes,
+  ]
   before_action :correct_user, only: [:edit, :update, :password_edit, :password_update]
-  before_action :admin_user,  only: :destroy
+  before_action :admin_user, only: :destroy
   protect_from_forgery :except => [:password_update, :facebook_login]
-  
+
   def new
     @user = User.new
   end
-  
+
   def index
-    @users = User.where(activated:true).paginate(page: params[:page]).search(params[:search])
+    @users = User.where(activated: true).paginate(page: params[:page]).search(params[:search])
   end
-  
+
   def create
     @user = User.new(user_params)
     if @user.save
@@ -23,20 +25,20 @@ class UsersController < ApplicationController
       render 'new'
     end
   end
-  
+
   def show
     @user = User.find(params[:id])
     @microposts = @user.microposts.paginate(page: params[:page])
     @micropost = Micropost.find_by(id: params[:id])
-    @comment = @micropost.comments.build 
+    @comment = @micropost.comments.build
     @comment_reply = @micropost.comments.build
-    redirect_to root_url and return unless @user.activated == true
+    redirect_to(root_url) && return unless @user.activated == true
   end
-  
+
   def edit
     @user = User.find(params[:id])
   end
-  
+
   def update
     @user = User.find(params[:id])
     if @user.update(user_params)
@@ -46,13 +48,13 @@ class UsersController < ApplicationController
       render 'edit'
     end
   end
-  
+
   def destroy
     User.find(params[:id]).destroy
     flash[:success] = "アカウントが削除されました"
     redirect_to users_url
   end
-  
+
   def following
     @title = "フォロー中"
     @user  = User.find(params[:id])
@@ -66,16 +68,16 @@ class UsersController < ApplicationController
     @users = @user.followers.paginate(page: params[:page])
     render 'show_follow'
   end
-  
+
   def likes
     @user = User.find_by(id: params[:id])
     @likes = Like.where(user_id: @user.id)
   end
-  
+
   def password_edit
     @user = User.find(params[:id])
   end
-  
+
   def password_update
     @user = User.find(params[:id])
     current_password = params[:user][:current_password]
@@ -97,10 +99,10 @@ class UsersController < ApplicationController
       render 'password_edit'
     end
   end
-  
+
   def facebook_login
-  #@user = User.from_omniauth(request.env["omniauth.auth"])
-  @user = User.find_or_create_from_auth(request.env['omniauth.auth'])
+    # @user = User.from_omniauth(request.env["omniauth.auth"])
+    @user = User.find_or_create_from_auth(request.env['omniauth.auth'])
     if @user.save(context: :facebook_login)
       log_in @user
       redirect_to @user
@@ -109,33 +111,32 @@ class UsersController < ApplicationController
       redirect_to auth_failure_path
     end
   end
-  
-  #認証に失敗した際の処理
-  def auth_failure 
+
+  # 認証に失敗した際の処理
+  def auth_failure
     @user = User.new
     render 'new'
   end
 
-    private
+  private
 
-    def user_params
-      params.require(:user).permit(:name, :username, :email, :website, :introduction, :email, :number, :sex, :password, :password_confirmation)
-    end
+  def user_params
+    params.require(:user).permit(:name, :username, :email, :website, :introduction, :email, :number, :sex, :password, :password_confirmation)
+  end
 
-    
-    #正しいユーザーか確認する
-    def correct_user
-      @user = User.find(params[:id])
-      redirect_to(root_url) unless current_user?(@user)
-    end
-    
-    # 管理者かどうか確認
-    def admin_user
-      redirect_to(root_url) unless current_user.admin?
-    end
-    
-       # 渡されたユーザーでログインする
-    def log_in(user)
-      session[:user_id] = user.id
-    end
+  # 正しいユーザーか確認する
+  def correct_user
+    @user = User.find(params[:id])
+    redirect_to(root_url) unless current_user?(@user)
+  end
+
+  # 管理者かどうか確認
+  def admin_user
+    redirect_to(root_url) unless current_user.admin?
+  end
+
+  # 渡されたユーザーでログインする
+  def log_in(user)
+    session[:user_id] = user.id
+  end
 end

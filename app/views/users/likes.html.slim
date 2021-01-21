@@ -1,0 +1,35 @@
+- provide(:title, 'お気に入り')
+.main.user-show
+  .container
+    aside.col-md-4
+      section.user_info
+        = render 'shared/user_info'
+      section.stats
+        = render 'shared/stats'
+    h3
+      | Favarite Parrots (
+      = @user.likes.count
+      | )
+    - @likes.each do |like|
+      - micropost = Micropost.find_by(id: like.micropost_id)
+      ol.microposts
+        |  <div id="micropost-
+        = micropost.id
+        | "> 
+        = link_to gravatar_for(micropost.user, size: 50), micropost.user
+      span.user
+        = link_to micropost.user.name, micropost.user
+      span.content
+        = micropost.content
+        = image_tag micropost.image.variant(gravity: :center, resize:"500x500^", crop:"500x500+0+0").processed if micropost.image.attached?
+      |  <div id="like-btn-
+      = micropost.id
+      | "> 
+      = render 'likes/like', micropost: micropost
+  span.timestamp
+    |  Posted 
+    = time_ago_in_words(micropost.created_at)
+    |  ago. 
+    - if current_user?(micropost.user)
+      = link_to "delete", micropost, method: :delete,
+      -                                                data: { confirm: "You sure?" }

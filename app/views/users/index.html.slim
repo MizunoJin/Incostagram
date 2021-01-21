@@ -1,0 +1,12 @@
+- provide(:title, '全てのユーザー')
+.container
+  h1
+    | ユーザーを探す
+  = will_paginate
+  = form_tag(users_path, :method => 'get' ) do
+    = text_field_tag :search, params[:search], {class: "search-form users-search", placeholder: "検索"}
+    button[type="submit"]
+      i.fas.fa-search
+  ul.users
+    = render @users
+  = will_paginate
