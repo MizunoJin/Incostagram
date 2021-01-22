@@ -18,8 +18,8 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
-      @user.send_activation_email
-      flash[:info] = "受信したEメールから認証手続きを進めてください"
+      @user.activate
+      log_in @user
       redirect_to root_url
     else
       render 'new'
@@ -28,11 +28,10 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @microposts = @user.microposts.paginate(page: params[:page])
+    @microposts = @user.microposts.includes([{ image_attachment: :blob }, :comments])
     @micropost = Micropost.find_by(id: params[:id])
     @comment = @micropost.comments.build
     @comment_reply = @micropost.comments.build
-    redirect_to(root_url) && return unless @user.activated == true
   end
 
   def edit

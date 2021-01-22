@@ -18,8 +18,7 @@
         = time_ago_in_words(comment.created_at)
         | 前
       - if current_user?(comment.user)
-        = link_to "削除", "/microposts/#{@micropost.id}/comments/#{comment.id}", method: :delete,
-        -                                          data: { confirm: "You sure?" }
+        = link_to "削除", "/microposts/#{@micropost.id}/comments/#{comment.id}", method: :delete, data: { confirm: "You sure?" }
     = form_with(model:[@micropost,@comment]) do |form|
       p
         label

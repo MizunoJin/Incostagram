@@ -8,5 +8,4 @@
       = render 'profile_form'
   .edit-account
     = link_to "パスワードを変更する", "password_edit", class: "edit-password-btn btn"
-    = link_to "アカウントを削除する", current_user, method: :delete, class: "delete-btn btn",
-    -                                     data: { confirm: "アカウントの全ての情報が削除されます。本当に削除しますか？" }
+    = link_to "アカウントを削除する", current_user, method: :delete, class: "delete-btn btn", data: { confirm: "アカウントの全ての情報が削除されます。本当に削除しますか？" }
