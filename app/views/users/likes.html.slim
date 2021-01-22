@@ -26,10 +26,8 @@
       = micropost.id
       | "> 
       = render 'likes/like', micropost: micropost
-  span.timestamp
-    |  Posted 
-    = time_ago_in_words(micropost.created_at)
-    |  ago. 
-    - if current_user?(micropost.user)
-      = link_to "delete", micropost, method: :delete,
-      -                                                data: { confirm: "You sure?" }
+      span.timestamp
+        = time_ago_in_words(micropost.created_at)
+        |  前 
+        - if current_user?(micropost.user)
+          = link_to "delete", micropost, method: :delete, data: { confirm: "You sure?" }

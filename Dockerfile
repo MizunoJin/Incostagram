@@ -28,6 +28,8 @@ RUN apk update && \
         build-base \
         curl-dev
 
+RUN apk add --update --no-cache less
+
 COPY Gemfile $ROOT
 COPY Gemfile.lock $ROOT
 
