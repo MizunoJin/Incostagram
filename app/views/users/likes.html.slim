@@ -10,24 +10,13 @@
       | Favarite Parrots (
       = @user.likes.count
       | )
-    - @likes.each do |like|
-      - micropost = Micropost.find_by(id: like.micropost_id)
-      ol.microposts
-        |  <div id="micropost-
-        = micropost.id
-        | "> 
-        = link_to gravatar_for(micropost.user, size: 50), micropost.user
-      span.user
-        = link_to micropost.user.name, micropost.user
-      span.content
-        = micropost.content
-        = image_tag micropost.image.variant(gravity: :center, resize:"500x500^", crop:"500x500+0+0").processed if micropost.image.attached?
-      |  <div id="like-btn-
-      = micropost.id
-      | "> 
-      = render 'likes/like', micropost: micropost
-      span.timestamp
-        = time_ago_in_words(micropost.created_at)
-        |  前 
-        - if current_user?(micropost.user)
-          = link_to "delete", micropost, method: :delete, data: { confirm: "You sure?" }
+    - if @user.likes
+      ol.microposts.showpage-microposts
+        - @likes.each do |like|
+          - micropost = like.micropost
+          li id="post-#{micropost.id}"
+            a data-toggle="modal" data-target="#exampleModalLong-#{micropost.id}"
+              = image_tag micropost.image.variant(gravity: :center, resize:"500x500^", crop:"500x500+0+0").processed, class: "showpage-image" if micropost.image.attached?
+          - @micropost = micropost
+          - @comment = @micropost.comments.build
+          = render 'microposts/modal', micropost: @micropost, comment: @comment

@@ -30,8 +30,6 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @microposts = @user.microposts.includes([{ image_attachment: :blob }, :comments])
     @micropost = Micropost.find_by(id: params[:id])
-    @comment = @micropost.comments.build
-    @comment_reply = @micropost.comments.build
   end
 
   def edit
@@ -70,7 +68,7 @@ class UsersController < ApplicationController
 
   def likes
     @user = User.find_by(id: params[:id])
-    @likes = Like.where(user_id: @user.id)
+    @likes = Like.where(user_id: @user.id).includes([{ micropost: [{ image_attachment: :blob }, :user, :comments] }])
   end
 
   def password_edit

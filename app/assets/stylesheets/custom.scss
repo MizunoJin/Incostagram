@@ -382,6 +382,12 @@ input {
   }
 }
 
+.user-search {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 30px;
+}
+
 /* microposts */
 
 .microposts {
@@ -463,6 +469,10 @@ span.image {
 }
 
 /* notifications */
+
+.notification-content {
+  margin-top: 20px;
+}
 
 .n-circle {
   position: absolute;

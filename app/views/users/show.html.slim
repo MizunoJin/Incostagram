@@ -22,11 +22,12 @@
         | )
       ol.microposts.showpage-microposts
         - @microposts.each do |micropost|
-          li id="post-<%= micropost.id %>"
+          li id="post-#{micropost.id}"
             a data-toggle="modal" data-target="#exampleModalLong-#{micropost.id}"
               = image_tag micropost.image.variant(gravity: :center, resize:"500x500^", crop:"500x500+0+0").processed, class: "showpage-image" if micropost.image.attached?
           - @micropost = micropost
-        = render 'microposts/modal', micropost: @micropost
+          - @comment = @micropost.comments.build.includes([:user])
+          = render 'microposts/modal', micropost: @micropost, comment: @comment
 
 
 javascript:
