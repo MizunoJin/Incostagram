@@ -5,7 +5,7 @@ header.navbar.navbar-fixed-top.navbar-inverse.navbar-expand-lg.bg-light.navbar-l
       - if logged_in?
         li.search-li
           = form_tag(root_path, :method => 'get', class: "search form-inline my-2 my-lg-0") do
-            = text_field_tag :search, params[:search], {class: "search-form header-search form-control mr-sm-2", placeholder: "検索"}
+            = text_field_tag :search, params[:search], {class: "search-form header-search form-control mr-sm-2", placeholder: "検索", height: "26"}
             button[type="submit btn btn-outline-success my-2 my-sm-0"]
               i.fas.fa-search
       button.navbar-toggler[type="button" data-toggle="collapse" data-target="#responsiveMenu" aria-controls="responsiveMenu" aria-expanded="false" aria-label="Toggle navigation"]

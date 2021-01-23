@@ -38,7 +38,7 @@ followers.each { |follower| follower.follow(user) }
 
 # ユーザーの一部を対象にマイクロポストを生成する
 users = User.order(:created_at).take(6)
-6.times do
+3.times do
   content = Faker::Lorem.sentence(word_count: 5)
   users.each do |user|
     micropost = user.microposts.build(content: content)

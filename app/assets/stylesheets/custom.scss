@@ -112,6 +112,8 @@ li.search-li {
   padding: 3px, 10px, 3px, 26px;
   width: 50%;
   margin: 0;
+  display: inline-block;
+  margin-right: 10px;
 }
 
 a.header-list {
@@ -401,10 +403,20 @@ input {
       padding: 5px 0;
     }
   }
+  @media (max-width: 768px){
+    .display-image {
+      width: 400px;
+    }
+  }
+  @media (max-width: 544px){
+    .display-image {
+      width: 300px;
+    }
+  }
   .timestamp {
     color: $gray-light;
     display: block;
-    margin-left: 60px;
+    margin-left: 20px;
   }
   .gravatar {
     float: left;
@@ -438,9 +450,10 @@ span.image {
 }
 /* like */
 
-.like {
-  margin-left: 60px;
+.under-info {
+  display: flex;
 }
+
 .like-btn {
   color: #8899a6;
 }
