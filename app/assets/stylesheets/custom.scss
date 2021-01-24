@@ -210,6 +210,17 @@ footer {
   min-height: 600px;
 }
 
+.signup-btn {
+  width: 50%;
+  margin: 10px auto;
+}
+
+.signup-btn-group {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
 /* about */
 
 .about-content {

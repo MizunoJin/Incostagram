@@ -13,10 +13,7 @@
     .container
       h1
         | Welcome to Incostagram!
-      = link_to "今すぐ登録!", signup_path, class: "btn btn-lg btn-primary"
-      = link_to "/auth/facebook" do
-        bottom.btn.btn-lg.btn-primary
-          i.fab.fa-facebook-square
-          |  Facebookでログイン 
+      .signup-btn-group
+        = link_to "今すぐ登録!", signup_path, class: "btn btn-lg btn-primary signup-btn"
 script
   |  $('#myModal').on('shown.bs.modal', function () { $('#myInput').trigger('focus') }) 
