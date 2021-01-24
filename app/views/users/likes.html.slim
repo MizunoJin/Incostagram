@@ -3,7 +3,7 @@
   .container
     aside.col-md-4
       section.user_info
-        = render 'shared/user_info'
+        = render 'shared/user_info', user: @user
       section.stats
         = render 'shared/stats'
     h3 お気に入り (#{@user.likes.count})

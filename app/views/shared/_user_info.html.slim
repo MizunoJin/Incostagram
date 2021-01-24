@@ -1,9 +1,9 @@
-= link_to gravatar_for(current_user, size: 50), current_user
+= link_to gravatar_for(user, size: 50), user
 h1
-  = current_user.name
+  = user.name
   |  / 
-  = current_user.username
+  = user.username
 span
-  = link_to "プロフィール", current_user
+  = link_to "プロフィール", user
 span
-  = pluralize(current_user.microposts.count, "tweet")
+  = pluralize(user.microposts.count, "tweet")
