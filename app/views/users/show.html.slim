@@ -11,9 +11,9 @@
         p
           = @user.introduction
           = @user.website
+        = link_to("お気に入り", "/users/#{@user.id}/likes", class: "favorite-link")
       section.stats
         = render 'shared/stats'
-      = link_to("お気に入り", "/users/#{@user.id}/likes")
     .col-md-8
       = render 'follow_form' if logged_in?
       h3

@@ -6,10 +6,7 @@
         = render 'shared/user_info'
       section.stats
         = render 'shared/stats'
-    h3
-      | Favarite Parrots (
-      = @user.likes.count
-      | )
+    h3 お気に入り (#{@user.likes.count})
     - if @user.likes
       ol.microposts.showpage-microposts
         - @likes.each do |like|

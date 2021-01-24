@@ -28,7 +28,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @microposts = @user.microposts.includes([{ image_attachment: :blob }, :comments])
+    @microposts = @user.microposts.includes([{ image_attachment: :blob }, { comments: :user }])
     @micropost = Micropost.find_by(id: params[:id])
   end
 
