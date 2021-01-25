@@ -14,7 +14,7 @@ $gray-medium-light: #eaeaea;
 /* universal */
 
 body {
-  padding-top: 60px;
+  padding-top: 50px;
 }
 
 section {
@@ -208,6 +208,13 @@ footer {
   background-size: cover;
   background-repeat: no-repeat;
   min-height: 600px;
+}
+
+@media (max-width: 768px) {
+  #incostagram-top {
+    background-size: auto 100%;
+    background-position: center;
+  }
 }
 
 .signup-btn {
